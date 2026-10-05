@@ -4,3 +4,6 @@ Obj/
 Logs/
 UserSettings/
 Build/
+Build.zip
+.DS_Store
+*.csproj
