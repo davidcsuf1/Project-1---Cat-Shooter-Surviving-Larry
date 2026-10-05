@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private TMP_Text killsText;
     [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private TMP_Text bestScoreText;
     [SerializeField] private GameObject gameOverPanel;
 
     private int kills = 0;
@@ -29,7 +30,17 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         spawner.StopSpawning();
+
+        int bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        if (kills > bestScore)
+        {
+            bestScore = kills;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            PlayerPrefs.Save();
+        }
+
         finalScoreText.text = "Kills: " + kills;
+        bestScoreText.text = "Best: " + bestScore;
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
