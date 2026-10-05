@@ -1,13 +1,24 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private EnemySpawner spawner;
-    [SerializeField] private int kills = 0;
+    [SerializeField] private TMP_Text killsText;
+    [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private GameObject gameOverPanel;
+
+    private int kills = 0;
+
+    private void Start()
+    {
+        killsText.text = "Kills: " + kills;
+    }
 
     public void AddKill()
     {
         kills++;
+        killsText.text = "Kills: " + kills;
     }
 
     public int GetKills()
@@ -18,6 +29,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         spawner.StopSpawning();
+        finalScoreText.text = "Kills: " + kills;
+        gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
