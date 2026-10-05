@@ -17,9 +17,22 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(ReturnToPool), lifetime);
     }
 
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(ReturnToPool));
+    }
+
     private void FixedUpdate()
     {
         body.MovePosition(body.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            ReturnToPool();
+        }
     }
 
     private void ReturnToPool()

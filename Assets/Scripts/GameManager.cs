@@ -13,18 +13,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        killsText.text = "Kills: " + kills;
+        killsText.text = "Score: " + kills;
     }
 
     public void AddKill()
     {
         kills++;
-        killsText.text = "Kills: " + kills;
-    }
-
-    public int GetKills()
-    {
-        return kills;
+        killsText.text = "Score: " + kills;
     }
 
     public void GameOver()
@@ -39,8 +34,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        finalScoreText.text = "Kills: " + kills;
-        bestScoreText.text = "Best: " + bestScore;
+        finalScoreText.text = "Score: " + kills;
+        bestScoreText.text = "Best Score: " + bestScore;
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }

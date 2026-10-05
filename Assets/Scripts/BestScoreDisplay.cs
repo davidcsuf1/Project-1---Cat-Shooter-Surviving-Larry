@@ -7,6 +7,6 @@ public class BestScoreDisplay : MonoBehaviour
 
     private void Start()
     {
-        bestScoreText.text = "Best: " + PlayerPrefs.GetInt("BestScore", 0);
+        bestScoreText.text = "Best Score: " + PlayerPrefs.GetInt("BestScore", 0);
     }
 }
