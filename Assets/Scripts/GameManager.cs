@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
 
     private int kills = 0;
+    private int bestScore = 0;
 
     private void Start()
     {
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
         killsText.text = "Score: " + kills;
     }
 
@@ -20,20 +22,18 @@ public class GameManager : MonoBehaviour
     {
         kills++;
         killsText.text = "Score: " + kills;
-    }
 
-    public void GameOver()
-    {
-        spawner.StopSpawning();
-
-        int bestScore = PlayerPrefs.GetInt("BestScore", 0);
         if (kills > bestScore)
         {
             bestScore = kills;
             PlayerPrefs.SetInt("BestScore", bestScore);
             PlayerPrefs.Save();
         }
+    }
 
+    public void GameOver()
+    {
+        spawner.StopSpawning();
         finalScoreText.text = "Score: " + kills;
         bestScoreText.text = "Best Score: " + bestScore;
         gameOverPanel.SetActive(true);
